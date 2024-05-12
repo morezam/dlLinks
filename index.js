@@ -4,6 +4,10 @@ import puppeteer from 'puppeteer-extra';
 
 const port = process.env.PORT || 4000;
 
+function getHost(url){
+    return url.split('/')[2].replace('www.', '')
+}
+
 const app = express();
 
 app.get('/', async (req, res) => {
@@ -12,6 +16,9 @@ app.get('/', async (req, res) => {
 	if(!url){
 		res.send('No Url Provided')
 	}
+
+	const host = getHost(url)
+	
 
 	const host = (new URL(url)).hostname.replace('www.','');
 	try {

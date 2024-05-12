@@ -7,6 +7,10 @@ const app = express();
 app.get('/', async (req, res) => {
 	const url = req.query.url;
 
+	if(!url){
+		res.send('No Url Provided')
+	}
+
 	const host = new URL(url).host;
 
 	try {

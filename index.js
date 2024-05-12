@@ -2,6 +2,8 @@ import express from 'express';
 import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer-extra';
 
+const port = process.env.PORT || 4000;
+
 const app = express();
 
 app.get('/', async (req, res) => {
@@ -11,8 +13,7 @@ app.get('/', async (req, res) => {
 		res.send('No Url Provided')
 	}
 
-	const host = new URL(url).host;
-
+	const host = (new URL(url)).hostname.replace('www.','');
 	try {
 		const browser = await puppeteer.launch({
 			args: chromium.args,
@@ -146,4 +147,4 @@ app.get('/', async (req, res) => {
 	}
 });
 
-app.listen(process.env.PORT, () => console.log('Server ready on port 3000.'));
+app.listen(port, () => console.log(`Server ready on port ${port}.`));

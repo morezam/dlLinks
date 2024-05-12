@@ -19,8 +19,6 @@ app.get('/', async (req, res) => {
 
 	const host = getHost(url)
 	
-
-	const host = (new URL(url)).hostname.replace('www.','');
 	try {
 		const browser = await puppeteer.launch({
 			args: chromium.args,
